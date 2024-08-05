@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="/css/doctor-func.css" />
+  <link rel="stylesheet" href="/css/overlay.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <title>Doctor</title>
+</head>
+
+<body>
+  <header class="py-1">
+    <nav id="navbar">
+      <div id="logo2">
+        <img id="logoing" src="/images/group 206.png" alt="">
+      </div>
+      <!-- Logout icon -->
+      <div class="dropdown">
+        <img class="dropbtn" onclick="toggleDropdown()" src="/images/profile.png" alt="">
+        <div id="dropdownContent" class="dropdown-content">
+          <div id="profile-sec">
+            <div id="meow">
+              <img id="profile2" src="/images/profile.png" alt="">
+            </div>
+            <div id="names">
+              <p class=" infos" id="info">
+                <%= surname %>
+                  <%= firstname %>
+                    <%= middle_initial %>
+              </p>
+              <p class="infor" id="info">
+                <%= profession %>
+              </p>
+            </div>
+          </div>
+          <hr>
+          <!---------------------------LOGOUT BUTTON---------------------------------------------->
+          <form action="/logout?_method=DELETE" method="POST">
+            <button id="log-butt" type="submit"><i class="fa fa-sign-out-alt"></i> Log out</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div id="semi-header">
+      <div>
+        <H1>PATIENTS INFORMATION</H1>
+      </div>
+
+
+
+      <!-- Search Form -->
+      <form action="/search-patient" method="post">
+        <div id="searcher" style="margin-right: 40px;">
+          <input id="searching" type="search" name="search" placeholder="Search name or unique ID" />
+          <button id="search-butt" type="submit"><i class="fas fa-search"></i></button>
+        </div>
+      </form>
+    </div>
+    <!-- Patients Table -->
+    <div id="body">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Date</th>
+              <th>Lastname</th>
+              <th>Firstname</th>
+              <th>Middle name</th>
+              <th>Purok/Street</th>
+              <th>Barangay</th>
+              <th>Town/City</th>
+              <th>Birthdate</th>
+              <th>Gender</th>
+              <th>Age</th>
+              <th>Phone no</th>
+              <th>Email</th>
+              <th>Philhealth no</th>
+              <th>Occupation</th>
+              <th>Guardian</th>
+              <th>Diagnoses</th>
+              <th>Findings</th>
+              <th>Medicine</th>
+              <th>Instruction</th>
+              <th>Quantity</th>
+              <th>Vital Signs</th>
+              <th>Laboratory request</th>
+              <th>Laboratory result</th>
+              <th>Diagnose</th>
+              <th>Findings</th>
+              <th>Prescribe</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% if (patientListDrop && patientListDrop.length> 0) { %>
+              <% patientListDrop.forEach(pt=> { %>
+                <tr>
+                  <td>
+                    <%= pt.unq_id %>
+                  </td>
+                  <td>
+                    <%= pt.check_date %>
+                  </td>
+                  <td>
+                    <%= pt.last_name %>
+                  </td>
+                  <td>
+                    <%= pt.first_name %>
+                  </td>
+                  <td>
+                    <%= pt.middle_name %>
+                  </td>
+                  <td>
+                    <%= pt.address %>
+                  </td>
+                  <td>
+                    <%= pt.barangay %>
+                  </td>
+                  <td>
+                    <%= pt.town %>
+                  </td>
+                  <td>
+                    <%= pt.birthdate %>
+                  </td>
+                  <td>
+                    <%= pt.gender %>
+                  </td>
+                  <td>
+                    <%= pt.age %>
+                  </td>
+                  <td>
+                    <%= pt.phone %>
+                  </td>
+                  <td>
+                    <%= pt.email %>
+                  </td>
+                  <td>
+                    <%= pt.philhealth_no %>
+                  </td>
+                  <td>
+                    <%= pt.occupation %>
+                  </td>
+                  <td>
+                    <%= pt.guardian %>
+                  </td>
+                  <td>
+                    <%= pt.diagnoses %>
+                  </td>
+                  <td>
+                    <%= pt.findings %>
+                  </td>
+                  <td>
+                    <%= pt.medicine %>
+                  </td>
+                  <td>
+                    <%= pt.instruction %>
+                  </td>
+                  <td>
+                    <%= pt.quantity %>
+                  </td>
+                  <td>
+                    <!-- Vitals Button -->
+                    <button class="openVitals" data-unq-id="<%= pt.unq_id %>"
+                      data-full-name="<%= pt.first_name %> <%= pt.last_name %>" data-height="<%= pt.height %>"
+                      data-weight="<%= pt.weight %>" data-systolic="<%= pt.systolic %>"
+                      data-diastolic="<%= pt.diastolic %>" data-temperature="<%= pt.temperature %>"
+                      data-pulse-rate="<%= pt.pulse_rate %>" data-respiratory-rate="<%= pt.respiratory_rate %>"
+                      data-bmi="<%= pt.bmi %>" data-comment="<%= pt.comment %>">Vital Signs</button>
+                  </td>
+                  <td>
+                    <!-- Lab Request Button -->
+                    <button class="openLabReq" data-unq-id="<%= pt.unq_id %>" data-check-date="<%= pt.check_date %>"
+                      data-full-name="<%= pt.first_name %> <%= pt.last_name %>" data-date="<%= pt.date_now %>"
+                      data-age="<%= pt.age %>" data-gender="<%= pt.gender %>" data-birthdate="<%= pt.birthdate %>"
+                      data-occupation="<%= pt.occupation %>" data-guardian="<%= pt.guardian %>">Laboratory
+                      Request</button>
+                  </td>
+                  <td>
+                    <!-----------lab result-->
+                    <button class="openLabRes" data-unq-id="<%= pt.unq_id %>" data-check-date="<%= pt.check_date %>"
+                      data-full-name="<%= pt.first_name %> <%= pt.last_name %>" data-date="<%= pt.date_now %>"
+                      data-age="<%= pt.age %>" data-gender="<%= pt.gender %>" data-birthdate="<%= pt.birthdate %>"
+                      data-occupation="<%= pt.occupation %>" data-guardian="<%= pt.guardian %>"
+                      data-lab-results='<%= JSON.stringify(pt.lab_result) %>'>Laboratory Result</button>
+                  </td>
+                  <td>
+                    <!-------diagnoses-->
+                    <button class="openDiagnose" data-unq-id="<%= pt.unq_id %>" data-check-date="<%= pt.check_date %>"
+                      data-full-name="<%= pt.first_name %> <%= pt.last_name %>" data-date="<%= pt.date_now %>"
+                      data-age="<%= pt.age %>" data-gender="<%= pt.gender %>" data-birthdate="<%= pt.birthdate %>"
+                      data-occupation="<%= pt.occupation %>" data-guardian="<%= pt.guardian %>">Diagnose</button>
+                  </td>
+                  <td>
+                    <!-------findings--->
+                    <button class="openFindings" data-unq-id="<%= pt.unq_id %>" data-check-date="<%= pt.check_date %>"
+                      data-full-name="<%= pt.first_name %> <%= pt.last_name %>" data-date="<%= pt.date_now %>"
+                      data-age="<%= pt.age %>" data-gender="<%= pt.gender %>" data-birthdate="<%= pt.birthdate %>"
+                      data-occupation="<%= pt.occupation %>" data-guardian="<%= pt.guardian %>">Findings</button>
+                  </td>
+                  <td>
+                    <!----------prescribe------>
+                    <button class="openPrescribe" data-unq-id="<%= pt.unq_id %>" data-check-date="<%= pt.check_date %>"
+                      data-full-name="<%= pt.first_name %> <%= pt.middle_name %> <%= pt.last_name %>"
+                      data-date="<%= pt.date_now %>" data-age="<%= pt.age %>" data-gender="<%= pt.gender %>"
+                      data-birthdate="<%= pt.birthdate %>" data-contact-number="<%= pt.phone %>"
+                      data-full-address="<%= pt.address %> <%= pt.barangay %> <%= pt.town %>"
+                      data-occupation="<%= pt.occupation %>" data-guardian="<%= pt.guardian %>"
+                      data-doctor="<%= profession %> <%= surname %> <%= firstname %> <%= middle_initial %>">Prescribe</button>
+                  </td>
+                </tr>
+                <% }) %>
+                  <% } else { %>
+                    <tr>
+                      <td colspan="27">No patients.</td>
+                    </tr>
+                    <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Vital Signs Form -->
+    <div id="overlay" style="display: none;"></div>
+    <div id="vitalForm" style="display: none">
+      <form>
+        <div class="popup-header">
+          <div id="head-pop">
+            <img id="heart" src="/images/Vector.png" alt="">
+            <h2>Vital Signs</h2>
+          </div>
+
+          <span id="closeVitalsBtn" class="close">&times;</span>
+        </div>
+        <div class="popup-content">
+          <label for="full_name">Name: </label>
+          <input type="text" id="full_name" name="full_name" placeholder="Full name" readonly />
+          <label for="unq_id">Unique ID: </label>
+          <input type="text" id="unq_id" name="unq_id" placeholder="Unique ID" readonly />
+        </div>
+        <div id="flex">
+          <hr>
+        </div>
+        <div class="form">
+          <div id="input-container">
+            <div id="inputs">
+              <label for="systolic">BP Systolic</label>
+              <input type="text" id="systolic" name="systolic" placeholder="Systolic" readonly />
+
+            </div>
+            <div id="inputs">
+              <label for="diastolic">BP Diastolic</label>
+              <input type="text" id="diastolic" name="diastolic" placeholder="Diastolic" readonly />
+            </div>
+            <div id="inputs">
+              <label for="pulse_rate">Pulse Rate</label>
+              <input type="text" id="pulse_rate" name="pulse_rate" placeholder="Pulse Rate" readonly />
+            </div>
+          </div>
+
+          <div id="input-container">
+            <div id="inputs">
+              <label for="height">Height</label>
+              <input type="text" id="height" name="height" placeholder="Height" readonly />
+            </div>
+            <div id="inputs">
+              <label for="weight">Weight</label>
+              <input type="text" id="weight" name="weight" placeholder="Weight" readonly />
+            </div>
+            <div id="inputs">
+              <label for="bmi">BMI</label>
+              <input type="text" id="bmi" name="bmi" placeholder="BMI" readonly />
+            </div>
+          </div>
+          <div id="input-containers">
+            <div id="inputs">
+              <label for="temperature">Temperature</label>
+              <input type="text" id="temperature" name="temperature" placeholder="Temperature" readonly />
+            </div>
+            <div id="inputs">
+              <label for="respiratory_rate">Respiratory Rate</label>
+              <input type="text" id="respiratory_rate" name="respiratory_rate" placeholder="Respiratory Rate"
+                readonly />
+            </div>
+
+          </div>
+        </div>
+        <div id="nurse">
+          <label for="comment">Nurse comment</label>
+          <input type="text" class="comment" id="comment" name="comment" placeholder="Comment" readonly />
+        </div>
+      </form>
+    </div>
+
+
+
+    <!-- Laboratory Request Form -->
+
+    <div id="labRequestForm" style="display: none">
+      <form action="/labrequest" method="POST">
+        <div class="popup-header">
+          <div id="head-pop">
+            <img id="heart" src="/images/Group 209.png" alt="">
+            <h2>Laboratory Request</h2>
+          </div>
+
+          <div id="closeLabRequestBtn" class="close">&times;</div>
+        </div>
+        <div id="tunga">
+          <div class="row">
+            <div>
+              <label for="full_name">Name: </label>
+              <input type="text" id="req_full_name" name="full_name" placeholder="Full Name" readonly />
+            </div>
+            <div>
+              <label for="unq_id">Unique ID: </label>
+              <input type="text" id="req_unq_id" name="unq_id" placeholder="Unique ID" readonly />
+            </div>
+            <div>
+              <label for="check_date">Date: </label>
+              <input type="text" id="req_check_date" name="check_date" readonly />
+            </div>
+            <div>
+              <label for="occupation">Occupation: </label>
+              <input type="text" id="req_occupation" name="occupation" readonly />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="age">Age: </label>
+              <input type="number" id="req_age" name="age" placeholder="Age" readonly />
+            </div>
+            <div>
+              <label for="gender">Gender: </label>
+              <input type="text" id="req_gender" name="gender" placeholder="Gender" readonly />
+            </div>
+            <div>
+              <label for="req_birthdate">Birthdate: </label>
+              <input type="text" id="req_birthdate" name="birthdate" readonly />
+            </div>
+            <div>
+              <label for="req_guardian">Guardian: </label>
+              <input type="text" id="req_guardian" name="guardian" readonly />
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <!-- Dynamic Category Fields Container -->
+        <div id="category-fields-container">
+          <!-- Initial Category Fields -->
+          <div class="category-fields">
+            <select class="category-dropdown" name="category">
+              <option value="default" disabled selected>Select a category</option>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+              <option value="option4" disabled>Option 4 (Disabled)</option>
+            </select>
+
+            <select class="service-dropdown" name="service">
+              <option value="default" disabled selected>Select a service</option>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+              <option value="option4" disabled>Option 4 (Disabled)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Add More Button -->
+        <button type="button" id="addMoreButton" onclick="addCategoryFields()">Add more</button>
+
+        <!-- Submit Button -->
+        <button type="submit" id="addMoreButton">Submit</button>
+      </form>
+    </div>
+
+    <!-- Laboratory Result Form -->
+
+    <div id="labResultForm" style="display: none">
+      <form>
+        <div class="popup-header">
+          <div id="head-pop">
+            <img id="heart" src="/images/carbon_result-new.png" alt="">
+            <h2>Laboratory Result</h2>
+          </div>
+
+          <div id="closeLabResultBtn" class="close">&times;</div>
+        </div>
+        <div id="tunga">
+          <div class="row">
+            <div>
+              <label for="full_name">Name: </label>
+              <input type="text" id="res_full_name" name="full_name" placeholder="Full Name" readonly />
+
+            </div>
+            <div>
+              <label for="unq_id">Unique ID: </label>
+              <input type="text" id="res_unq_id" name="unq_id" placeholder="Unique ID" readonly />
+            </div>
+            <div>
+              <label for="check_date">Date: </label>
+              <input type="text" id="res_check_date" name="check_date" readonly />
+            </div>
+            <div>
+              <label for="occupation">Occupation: </label>
+              <input type="text" id="res_occupation" name="occupation" readonly />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="age">Age: </label>
+              <input type="number" id="res_age" name="age" placeholder="Age" readonly />
+            </div>
+            <div>
+              <label for="gender">Gender: </label>
+              <input type="text" id="res_gender" name="gender" placeholder="Gender" readonly />
+            </div>
+            <div>
+              <label for="req_birthdate">Birthdate: </label>
+              <input type="text" id="res_birthdate" name="birthdate" readonly />
+            </div>
+            <div>
+              <label for="req_guardian">Guardian: </label>
+              <input type="text" id="res_guardian" name="guardian" readonly />
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div>
+          <!-- Container for displaying multiple images -->
+          <h3 style="font-family: 'Poppins', sans-serif; margin-left: 25px;">List of Lab Results</h3>
+          <div id="list">
+            <ul id="labResultList"></ul>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Diagnoses Form -->
+    <div id="diagnoseForm" style="display: none">
+      <form action="/add-diagnoses" method="POST">
+        <div class="popup-header">
+          <div id="head-pop">
+            <img id="heart" src="/images/diagnose.png" alt="">
+            <h2>Diagnose</h2>
+          </div>
+
+          <div id="closeDiagnoseBtn" class="close">&times;</div>
+        </div>
+        <div id="tunga">
+          <div class="row">
+            <div>
+              <label for="full_name">Name: </label>
+              <input type="text" id="dia_full_name" name="full_name" placeholder="Full Name" readonly />
+
+            </div>
+            <div>
+              <label for="unq_id">Unique ID: </label>
+              <input type="text" id="dia_unq_id" name="unq_id" placeholder="Unique ID" readonly />
+            </div>
+            <div>
+              <label for="check_date">Date: </label>
+              <input type="text" id="dia_check_date" name="check_date" readonly />
+            </div>
+            <div>
+              <label for="occupation">Occupation: </label>
+              <input type="text" id="dia_occupation" name="occupation" readonly />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="age">Age: </label>
+              <input type="number" id="dia_age" name="age" placeholder="Age" readonly />
+            </div>
+            <div>
+              <label for="gender">Gender: </label>
+              <input type="text" id="dia_gender" name="gender" placeholder="Gender" readonly />
+            </div>
+            <div>
+              <label for="req_birthdate">Birthdate: </label>
+              <input type="text" id="dia_birthdate" name="birthdate" readonly />
+            </div>
+            <div>
+              <label for="req_guardian">Guardian: </label>
+              <input type="text" id="dia_guardian" name="guardian" readonly />
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div id="diagnose-text">
+          <label id="dia-label" for="diagnoses">Diagnoses</label>
+          <input id="dia-input" type="text" name="diagnoses" required>
+        </div>
+        <div id="sub-but">
+          <button id="sub-out" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+
+
+    <!-- Findings Form -->
+    <div id="findingsForm" style="display: none">
+      <form action="/add-findings" method="post">
+        <div class="popup-header">
+          <div id="head-pop">
+            <img id="heart" src="/images/group.png" alt="">
+            <h2>Findings</h2>
+          </div>
+
+          <div id="closeFindingsBtn" class="close">&times;</div>
+        </div>
+
+        <div id="tunga">
+          <div class="row">
+            <div>
+              <label for="full_name">Name: </label>
+              <input type="text" id="fin_full_name" name="full_name" placeholder="Full Name" readonly />
+
+            </div>
+            <div>
+              <label for="unq_id">Unique ID: </label>
+              <input type="text" id="fin_unq_id" name="unq_id" placeholder="Unique ID" readonly />
+            </div>
+            <div>
+              <label for="check_date">Date: </label>
+              <input type="text" id="fin_check_date" name="check_date" readonly />
+            </div>
+            <div>
+              <label for="occupation">Occupation: </label>
+              <input type="text" id="fin_occupation" name="occupation" readonly />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="age">Age: </label>
+              <input type="number" id="fin_age" name="age" placeholder="Age" readonly />
+            </div>
+            <div>
+              <label for="gender">Gender: </label>
+              <input type="text" id="fin_gender" name="gender" placeholder="Gender" readonly />
+            </div>
+            <div>
+              <label for="req_birthdate">Birthdate: </label>
+              <input type="text" id="fin_birthdate" name="birthdate" readonly />
+            </div>
+            <div>
+              <label for="req_guardian">Guardian: </label>
+              <input type="text" id="fin_guardian" name="guardian" readonly />
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div id="diagnose-text">
+          <label id="dia-label" for="findings">Findings</label>
+          <input id="dia-input" type="text" name="findings">
+        </div>
+        <div id="sub-but">
+          <button id="sub-out" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Prescribe Form -->
+    <div id="prescribeForm" style="display: none">
+      <form action="/send-prescription" method="post">
+        <div class="popup-header">
+          <div id="head-pop">
+            <img id="heart" style="margin-left: 10px;" src="/images/prescibe.png" alt="">
+            <h2>Prescribe</h2>
+          </div>
+
+          <div id="closePrescribeBtn" class="close">&times;</div>
+        </div>
+        <div id="tunga">
+          <div class="row">
+            <div>
+              <label for="full_name">Name: </label>
+              <input type="text" id="pres_full_name" name="full_name" placeholder="Full Name" readonly />
+
+            </div>
+            <div>
+              <label for="unq_id">Unique ID: </label>
+              <input type="text" id="pres_unq_id" name="unq_id" placeholder="Unique ID" readonly />
+            </div>
+            <div>
+              <label for="check_date">Date: </label>
+              <input type="date" id="pres_check_date" name="check_date" readonly />
+            </div>
+            <div>
+              <label for="occupation">Occupation: </label>
+              <input type="text" id="pres_occupation" name="occupation" readonly />
+            </div>
+            <div>
+              <label for="age">Age: </label>
+              <input type="number" id="pres_age" name="age" placeholder="Age" readonly />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="gender">Gender: </label>
+              <input type="text" id="pres_gender" name="gender" placeholder="Gender" readonly />
+            </div>
+            <div>
+              <label for="req_birthdate">Birthdate: </label>
+              <input type="date" id="pres_birthdate" name="birthdate" readonly />
+            </div>
+            <div>
+              <label for="phone">Contact: </label>
+              <input type="text" id="pres_phone" name="phone" readonly>
+            </div>
+            <div>
+              <label for="req_guardian">Guardian: </label>
+              <input type="text" id="pres_guardian" name="guardian" readonly />
+            </div>
+            <div>
+              <label for="pres_full_address">Address: </label>
+              <input type="text" id="pres_full_address" name="full_address" readonly />
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div id="separate">
+          <h3 style="font-family: 'Poppins', sans-serif; margin-left: 25px;">Select Medicine</h3>
+          <div style="display: flex; margin-left: 25px;">
+            <input class="suggestions" type="text" id="search-box" name="medicine" placeholder="Search...">
+            <div id="suggestions"></div>
+            <input class="suggestions" type="text" id="pres_instruction" name="instruction" placeholder="Instruction">
+            <input class="suggestions" type="number" id="pres_quantity" name="quantity" placeholder="Quantity">
+
+          </div>
+          <h3 style="font-family: 'Poppins', sans-serif; margin-left: 25px;">Enter receiver information</h3>
+          <div style="margin-left: 25px;">
+
+            <input type="text" id="pres_reciever" name="receiver" placeholder="receiver">
+            <input type="text" id="pres_relationship" name="relationship" placeholder="relationship">
+            <input type="text" id="pres_doctor" name="doctor_name" placeholder="Doctor" readonly>
+          </div>
+        </div>
+
+        <div id="submit-div">
+          <button id="sub-butt" type="submit">submit</button>
+        </div>
+      </form>
+    </div>
+    </div>
+  </main>
+  <% if (medResults && medResults.length> 0) { %>
+    <div id="alertMessage">
+      <div class="header">
+        <p style="margin: 0;">NOTIFICATION</p>
+      </div>
+      <div class="content">
+        <p>AVAILABLE LAB RESULTS</p>
+        <ul>
+          <% medResults.forEach(list=> { %>
+            <li>
+              <%= list.last_name %>
+                <%= list.first_name %>
+                  <%= list.middle_name %>
+            </li>
+            <% }) %>
+        </ul>
+      </div>
+      <% } %>
+        <button id="closeAlertBtn" type="button">Close</button>
+    </div>
+    <script src="/js/websocket.js"></script>
+    <script src="/js/overlay.js"></script>
+    <script src="/js/doctor-func.js"></script>
+</body>
+
+</html>

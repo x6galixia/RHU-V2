@@ -1,0 +1,261 @@
+body {
+  margin: 0;
+  background-image: url("/images/wp9830502.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#login-form {
+  background-color: #fff;
+  width: 40%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 20px;
+  margin: 0 !important;
+  height: fit-content;
+}
+
+.container1 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+
+#cheese1 {
+  text-align: center;
+}
+
+#center1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
+#icon {
+  width: 100%;
+}
+
+#center {
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+}
+
+#rectang {
+  width: 70%;
+  min-width: 350px;
+  max-width: 90%;
+  min-height: 450px;
+  max-height: 90%;
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 20px;
+  align-items: center;
+  box-shadow: 8px 10px 4px 0px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#imahe {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: #42BD37;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  border-radius: 10px;
+  padding-bottom: 50px;
+}
+
+#Login-input {
+  display: flex;
+}
+
+#user_type {
+  flex: 1;
+}
+
+#choosing {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+#btn {
+  background-color: #41a02c;
+  color: white;
+  padding: 15px;
+  width: 80%;
+  margin-right: 20px;
+  border-style: none;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25),
+    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.logo {
+  display: flex;
+  margin-top: 50px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+#logo1 {
+  height: 60px;
+  margin-right: 10px;
+}
+
+#illustration {
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-family: sans-serif;
+  color: white;
+  margin: 0;
+  font-size: 35px;
+  padding: 0;
+}
+
+p {
+  font-family: sans-serif;
+  color: white;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+h2 {
+  font-family: sans-serif;
+  font-size: 20px;
+  color: white;
+}
+
+#h1 {
+  font-family: sans-serif;
+  margin-left: 40px;
+  margin-top: 90px;
+  margin-bottom: 20px;
+}
+
+#h4 {
+  font-family: sans-serif;
+  margin-left: 40px;
+  font-weight: lighter;
+  margin-bottom: 20px;
+}
+
+#rectangle {
+  width: 40%;
+  height: 40%;
+  background-color: white;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+.icon {
+  margin-top: 50px;
+}
+
+.container1 {
+  width: 90%;
+}
+
+.entryarea1 {
+  position: relative;
+  line-height: 50px;
+}
+
+input {
+  width: 100%;
+  height: 50px;
+  line-height: 20px;
+  outline: none;
+  font-size: 25px;
+  padding: 0 20px;
+  line-height: 80px;
+  border-radius: 20px;
+  border: 1px solid #000000;
+  background: transparent;
+  transition: 0.1s ease;
+  z-index: 1111;
+}
+
+.labelline {
+  position: absolute;
+  margin-top: -40px;
+  margin-left: 20px;
+  font-size: 18px;
+  color: rgb(0, 0, 0);
+  padding: 0;
+  background-color: rgb(255, 255, 255);
+  transition: 0.2s ease;
+  width: fit-content;
+  line-height: normal;
+}
+
+input:focus,
+input:valid {
+  color: rgb(215, 16, 139);
+  border: 2px solid rgb(215, 16, 139);
+}
+
+input:focus+.labelline,
+input:valid+.labelline {
+  color: rgb(215, 16, 139);
+  height: 30px;
+  padding: 0 12px;
+  line-height: 30px;
+  transform: translate(-15px, -30px) scale(0.88);
+  z-index: 1111;
+}
+
+#Log-butt {
+  height: 50px;
+  width: 100%;
+  background-color: #FF007F;
+  border-radius: 20px;
+  font-size: 20px;
+  color: white;
+  border-style: none;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+#cheese {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+#contributor {
+  display: flex;
+  justify-content: center;
+  align-content: flex-end;
+}

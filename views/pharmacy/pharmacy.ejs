@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+  <link rel="stylesheet" href="/css/pharmacy.css" />
+  <link rel="stylesheet" href="/css/sidebar.css" />
+  <link rel="stylesheet" href="/css/alert-message.css" />
+
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+  <title>Inventory</title>
+</head>
+
+<body>
+  <header class="py-1">
+    <nav id="navbar">
+      <div id="logo2">
+        <div class="openbtn" onclick="toggleNav()">&#9776;</div>
+        <img id="logoing" src="/images/Group 206.png" alt="">
+      </div>
+
+      <div id="sidebar" class="sidebar">
+        <div id="profile-sec">
+          <div id="meow">
+            <img id="profile2" src="/images/profile.png" alt="">
+          </div>
+          <div id="names">
+            <p class="infos" id="info">
+              <%= surname %>
+                <%= firstname %>
+                  <%= middle_initial %>
+            </p>
+            <p class="infor" id="info">
+              <%= profession %>
+            </p>
+          </div>
+        </div>
+        <div id="features">
+          <hr>
+          <form action="/pharmacy/inventory" method="GET">
+            <button id="log-butt" type="submit"><i class="fas fa-home"></i> HOME </button>
+          </form>
+
+          <form action="/pharmacy/add-medicine" method="GET">
+            <button id="log-butt" type="submit"><i class="fas fa-plus-circle"></i> ADD MEDICINE </button>
+          </form>
+
+          <form action="/pharmacy/dispense" method="GET">
+            <button id="log-butt" type="submit"><i class="fas fa-pills"></i> DISPENSE </button>
+          </form>
+
+          <form action="/pharmacy/beneficiary-records" method="GET">
+            <button id="log-butt" type="submit"><i class="fas fa-file-medical-alt"></i> RECORD </button>
+          </form>
+
+          <form action="/pharmacy/trends" method="GET">
+            <button id="log-butt" type="submit"><i class="fas fa-chart-line"></i> TRENDS </button>
+          </form>
+
+          <form action="/pharmacy/add-beneficiary" method="GET">
+            <button id="log-butt" type="submit"><i class="fas fa-user-plus"></i> ADD BENEFICIARY </button>
+          </form>
+
+          <form action="/logout?_method=DELETE" method="POST">
+            <button id="log-butt" type="submit"><i class="fa fa-sign-out-alt"></i> LOGOUT </button>
+          </form>
+        </div>
+      </div>
+      </div>
+    </nav>
+  </header>
+  <div id="semi-header">
+    <div>
+      <H1>INVENTORY FOR MEDICINE</H1>
+    </div>
+    <!-- Search Form -->
+    <form action="/search-medicine" method="post">
+      <div id="searcher" style="margin-right: 40px;">
+        <input id="searching" type="search" name="search" placeholder="Search" />
+        <button id="search-butt" type="submit"><i class="fas fa-search"></i></button>
+      </div>
+    </form>
+  </div>
+  <div id="font">
+    <div id="section1">
+      <table id="medicineTable">
+        <thead>
+          <tr>
+            <th>PRODUCT ID</th>
+            <th>PRODUCT CODE</th>
+            <th>PRODUCT NAME </th>
+            <th>BRAND NAME</th>
+            <th>SUPPLIER</th>
+            <th>DOSAGE FORM</th>
+            <th>DOSAGE</th>
+            <th>REORDER LEVEL</th>
+            <th>BATCH NUMBER</th>
+            <th>EXPIRATION DATE</th>
+            <th>QUANTITY</th>
+          </tr>
+        </thead>
+        <% if (medList && medList.length> 0) { %> <% medList.forEach(med=> { %>
+            <tr>
+              <td>
+                <%= med.product_id %>
+              </td>
+              <td>
+                <%= med.product_code %>
+              </td>
+              <td>
+                <%= med.product_name %>
+              </td>
+              <td>
+                <%= med.brand_name %>
+              </td>
+              <td>
+                <%= med.supplier %>
+              </td>
+              <td>
+                <%= med.dosage_form %>
+              </td>
+              <td>
+                <%= med.dosage %>
+              </td>
+              <td>
+                <%= med.reorder_level %>
+              </td>
+              <td>
+                <%= med.batch_number %>
+              </td>
+              <td>
+                <%= med.expiration %>
+              </td>
+              <td>
+                <%= med.product_quantity %>
+              </td>
+            </tr>
+
+            <% }) %>
+              <% } else { %>
+                <tr>
+                  <td colspan="11">No stock of medicine.</td>
+                </tr>
+                <% } %>
+                  </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="buttons">
+    <button id="downloadbtn" type="button">DOWNLOAD CSV</button>
+    <button id="printbtn" type="button">PRINT CSV</button>
+  </div>
+
+  <% if (lowStockItems && lowStockItems.length> 0) { %>
+    <div id="alertMessage">
+      <div class="header">
+        <p style="margin: 0;">ALERT!!!</p>
+      </div>
+      <div class="content">
+        <p>LOW STOCKS MEDICINE</p>
+        <ul>
+          <% lowStockItems.forEach(list=> { %>
+            <li>
+              <%= list.product_name %> QTY: <%= list.product_quantity %>
+            </li>
+            <% }) %>
+        </ul>
+      </div>
+      <% } %>
+        <button id="closeAlertBtn" type="button">Close</button>
+    </div>
+
+    <script src="/js/websocket.js"></script>
+    <script src="/js/aside.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/pharmacy-func.js"></script>
+    <script src="/js/csv.js"></script>
+</body>
+
+</html>

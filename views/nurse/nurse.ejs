@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/nurse.css">
+
+    <title>Nurse</title>
+</head>
+
+<body>
+    <header class="py-1">
+        <nav id="navbar">
+            <div id="logo2">
+                <img id="logoing" src="/images/group 206.png" alt="">
+            </div>
+            <!-- Logout icon -->
+            <div class="dropdown">
+                <img class="dropbtn" onclick="toggleDropdown()" src="/images/profile.png" alt="">
+                <div id="dropdownContent" class="dropdown-content">
+                    <div id="profile-sec">
+                        <div id="meow">
+                            <img id="profile2" src="/images/profile.png" alt="">
+                        </div>
+                        <div id="names">
+                            <p class=" infos" id="info">
+                                <%= surname %>
+                                    <%= firstname %>
+                                        <%= middle_initial %>
+                            </p>
+                            <p class="infor" id="info">
+                                <%= profession %>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <!---------------------------LOGOUT BUTTON---------------------------------------------->
+                    <form action="/logout?_method=DELETE" method="POST">
+                        <button id="log-butt" type="submit"><i class="fa fa-sign-out-alt"></i> Log out</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <!---------------------generate id and search id------------------>
+    <div id="popup-overlay" class="popup-overlay hidden">
+        <div id="popup" class="popup">
+            <span id="popup-close" class="popup-close">&times;</span>
+            <p id="popup-message"></p>
+        </div>
+    </div>
+
+    <!-- Existing content -->
+    <div id="success-add">
+        <% if (message && message.error) { %>
+            <p id="error-message">
+                <%= message.error %>
+            </p>
+        <% } %>
+        <% if (message && message.success) { %>
+            <p id="success-message">
+                <%= message.success %>
+            </p>
+        <% } %>
+    </div>
+
+    <form action="/nurse/send-patient-info" method="post">
+        <div id="allAround">
+            <div id="tunga">
+                <div id="semi-header">
+                    <div class="patient-div" id="patient-div">
+                        <h3 id="PATIENT">PATIENT INFORMATION</h3>
+                    </div>
+                    <!-------------------scanner------------------->
+                    <div id="vector">
+                        <button id="scan-butt" type="button" onclick="window.location.href='scanner'">
+                            <img src="/images/Vectors.png" alt="">
+                        </button>
+                    </div>
+                </div>
+                <div id="sec1">
+                    <div class="label">
+                        <label for="qrResultInput">Unique ID:</label>
+
+                        <div>
+                            <input type="text" id="idInput" name="unq_id" placeholder="unique id">
+                            <button id="generateButton" type="button">Generate ID</button>
+                            <button id="searchButton" type="button"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div id="separate">
+                    <div class="label">
+                        <label for="last_name">Lastname</label>
+                        <input type="text" id="last_name" name="last_name">
+                    </div>
+                    <div class="label">
+                        <label for="first_name">Firstname</label>
+                        <input type="text" id="first_name" name="first_name">
+                    </div>
+                    <div class="label">
+                        <label for="middle_name">Middlename</label>
+                        <input type="text" id="middle_name" name="middle_name">
+                    </div>
+                </div>
+                <div id="cheese">
+                    <label for="address">Home no./Street</label>
+                    <input type="text" id="address" name="address">
+                    <label for="barangay">Barangay</label>
+                    <input type="text" id="barangay" name="barangay">
+                    <label for="town">Town</label>
+                    <input type="text" id="town" name="town">
+                </div>
+                <div id="separate">
+                    <div class="label">
+                        <label for="birthdate">Birthdate</label>
+                        <input type="date" id="birthdate" name="birthdate">
+                    </div>
+                    <div class="label">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+
+
+                </div>
+                <div id="separate">
+                    <div class="label">
+                        <label for="gender">Gender</label>
+                        <input type="text" id="gender" name="gender">
+                    </div>
+                    <div class="label">
+                        <label for="guardian">Guardian</label>
+                        <input type="text" id="guardian" name="guardian">
+                    </div>
+
+                </div>
+
+                <div id="separate">
+                    <div class="label">
+                        <label for="date">Date</label>
+                        <input type="date" id="check_date" name="check_date">
+                    </div>
+                    <div class="label">
+                        <label for="phone">Phone</label>
+                        <input type="text" id="phone" name="phone">
+                    </div>
+
+
+                </div>
+                <div id="separate">
+                    <div class="label">
+                        <label for="philhealth_no">Philhealth no</label>
+                        <input type="text" id="philhealth_no" name="philhealth_no">
+                    </div>
+                    <div class="label">
+                        <label for="occupation">Occupation</label>
+                        <input type="text" id="occupation" name="occupation">
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div id="tungadaman">
+                <div id="semi-headers">
+                    <div>
+                        <h3 id="PATIENTS"><i class="fa fa-heartbeat" style="font-size:24px;"></i> VITAL SIGNS</h3>
+                    </div>
+                </div>
+                <div>
+                    <h2>Enter patients vital signs</h2>
+                </div>
+                <div id="separates">
+                    <div class="label">
+                        <label class="required" for="height">Height</label>
+                        <input type="text" id="height" name="height" required>
+                    </div>
+                    <div class="label">
+                        <label class="required" for="weight">Weight</label>
+                        <input type="text" id="weight" name="weight" required>
+                    </div>
+                </div>
+
+                <div id="separates">
+                    <div class="label">
+                        <label class="required" for="temperature">Temperature</label>
+                        <input type="text" id="temperature" name="temperature" required>
+                    </div>
+                    <div class="label">
+                        <label class="required" for="pulse_rate">Pulse rate</label>
+                        <input type="text" id="pulse_rate" name="pulse_rate" required>
+                    </div>
+                </div>
+                <div id="separates">
+                    <div class="label">
+                        <label class="required" for="systolic">BP Systolic</label>
+                        <input type="text" id="systolic" name="systolic" placeholder="systolic" required>
+                    </div>
+                    <div class="label">
+                        <label class="required" for="pulse_rate">BP Diastolic</label>
+                        <input type="text" id="diastolic" name="diastolic" placeholder="diastolic" required>
+                    </div>
+                </div>
+                <div id="separates">
+                    <div class="label">
+                        <label class="required" for="respiratory_rate">Respiratory rate</label>
+                        <input type="text" id="respiratory_rate" name="respiratory_rate" required>
+                    </div>
+                    <div class="label">
+                        <label class="required" for="bmi">BMI</label>
+                        <input type="text" id="bmi" name="bmi">
+                    </div>
+                </div>
+                <label for="comment">Comment</label>
+                <input type="text" id="comment" name="comment">
+                <br>
+                <div id="submitted">
+                    <div>
+                        <button type="submit" id="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <script src="/js/popup.js"></script>
+    <script src="/js/nurse-scanned.js"></script>
+</body>
+
+</html

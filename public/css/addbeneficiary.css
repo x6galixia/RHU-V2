@@ -1,0 +1,146 @@
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    scroll-behavior: smooth;
+    overflow: scroll;
+}
+
+html {
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    margin-top: 150px;
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 50px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#add-benef {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    color: #FF007F;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="date"],
+select {
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#beneficiary_birthdate {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+form {
+    margin: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.center {
+    padding-right: 10px;
+}
+
+#subb {
+    margin-top: 20px;
+    width: 100%;
+    background-color: #5ca941;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#subb:hover {
+    background-color: #5da941c9;
+
+}
+
+
+
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.nav-buttons form {
+    flex: 1;
+    margin: 0 5px;
+}
+
+.nav-buttons button {
+    background-color: #007bff;
+}
+
+.nav-buttons button:hover {
+    background-color: #0056b3;
+}
+
+.logout-button {
+    text-align: right;
+}
+
+.logout-button button {
+    background-color: #dc3545;
+}
+
+.logout-button button:hover {
+    background-color: #c82333;
+}
+
+.message {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+}

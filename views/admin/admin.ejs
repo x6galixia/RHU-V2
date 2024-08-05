@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin-func.css">
+    <title>Admin</title>
+</head>
+
+<body>
+    <div id="message">
+        <% if (message && message.error) { %>
+            <div class="error">
+                <p>
+                    <%= message.error %>
+                </p>
+            </div>
+            <% } %>
+                <% if (message && message.success) { %>
+                    <div class="success">
+                        <p>
+                            <%= message.success %>
+                        </p>
+                    </div>
+                    <% } %>
+    </div>
+
+    <form action="/hidden/admin/create-user" method="POST">
+        <h1>Create User</h1>
+        <input type="text" id="user_id" name="user_id" placeholder="User ID" readonly>
+        <select name="rhu_id" id="rhu_id">
+            <option value="default" disabled selected>Choose an RHU</option>
+            <option value="rhu1">RHU 1</option>
+            <option value="rhu2">RHU 2</option>
+            <option value="rhu3">RHU 3</option>
+            <option value="rhu4">RHU 4</option>
+        </select>
+        <input type="text" name="surname" placeholder="Surname">
+        <input type="text" name="firstname" placeholder="First Name">
+        <input type="text" name="middle_initial" placeholder="Middle Initial">
+        <input type="text" name="profession" placeholder="Profession">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <select name="user_type" id="user_type">
+            <option value="default" disabled selected>Choose a usertype</option>
+            <option value="doctor">Doctor</option>
+            <option value="nurse">Nurse</option>
+            <option value="medtech">Medtech</option>
+            <option value="pharmacist">Pharmacist</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    <script src="/js/admin-func.js"></script>
+</body>
+
+</html>

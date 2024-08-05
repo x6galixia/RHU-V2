@@ -1,0 +1,48 @@
+#alertMessage {
+  display: none;
+  box-shadow: 8px 10px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 400px;
+  border-radius: 10px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 11111111;
+  background-color: white;
+  overflow: auto;
+}
+
+#alertMessage.show {
+  display: block;
+}
+
+#alertMessage .header {
+  background-color: rgb(29, 148, 29);
+  color: white;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+}
+
+#alertMessage .content {
+  padding: 10px;
+}
+
+#alertMessage ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+#closeAlertBtn {
+  display: none;
+  margin: 10px auto;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(29, 148, 29);
+  color: white;
+  cursor: pointer;
+}
+
+#closeAlertBtn:hover {
+  background-color: rgb(20, 120, 20);
+}

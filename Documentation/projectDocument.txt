@@ -1,0 +1,162 @@
+-- database configuration
+
+-- user login configuration --
+CREATE TABLE users (
+    user_id VARCHAR(50) PRIMARY KEY,
+    rhu_id VARCHAR(100),
+    surname VARCHAR(50) NOT NULL,
+    firstname VARCHAR(50) NOT NULL,
+    middle_initial VARCHAR(5) NOT NULL,
+    profession VARCHAR(100) NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    user_type VARCHAR(50) NOT NULL
+);
+
+--  rhu
+CREATE TABLE patients (
+    unq_id VARCHAR(100) PRIMARY KEY,
+    rhu_id VARCHAR(100) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    middle_name VARCHAR(50),
+    address VARCHAR(100) NOT NULL,
+    barangay VARCHAR(100) NOT NULL,
+    town VARCHAR(100) NOT NULL,
+    birthdate DATE NOT NULL,
+    gender VARCHAR(10) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    philhealth_no VARCHAR(100) NOT NULL,
+    occupation VARCHAR(250),
+    guardian VARCHAR(250),
+    check_date DATE,
+
+    -- nurse
+    height VARCHAR(50),
+    weight VARCHAR(50),
+    systolic VARCHAR(50),
+    diastolic VARCHAR(50),
+    temperature VARCHAR(50),
+    pulse_rate VARCHAR(50),
+    respiratory_rate VARCHAR(50),
+    bmi VARCHAR(50),
+    comment VARCHAR(250),
+
+    -- doctor
+    follow_date DATE,
+    diagnoses VARCHAR(250),
+    findings VARCHAR(250),
+    category TEXT[],  -- Array of text
+    service TEXT[],   -- Array of text
+    medicine TEXT[],
+    instruction TEXT[],
+    quantity INT[],
+    prescription_date DATE,
+
+    lab_result TEXT[]
+);
+
+CREATE TABLE prescription (
+    unq_id VARCHAR(250) PRIMARY KEY,
+    full_name VARCHAR(250),
+    age INT,
+    gender VARCHAR(10),
+    check_date DATE,
+    full_address VARCHAR(250),
+    phone VARCHAR(100),
+    guardian VARCHAR(250),
+    medicine VARCHAR(250),
+    dosage VARCHAR(50),
+    instruction VARCHAR(250),
+    quantity INT,
+    receiver VARCHAR(250),
+    relationship VARCHAR(250),
+    doctor_name VARCHAR(250)
+);
+
+
+--  cetizens info
+    CREATE TABLE citizen (
+        unq_id VARCHAR(100) PRIMARY KEY,
+        last_name VARCHAR(50) NOT NULL,
+        first_name VARCHAR(50) NOT NULL,
+        middle_name VARCHAR(50),
+        address VARCHAR(100) NOT NULL,
+        barangay VARCHAR(100) NOT NULL,
+        town VARCHAR(100) NOT NULL,
+        birthdate DATE NOT NULL,
+        gender VARCHAR(10) NOT NULL,
+        phone VARCHAR(15) NOT NULL,
+        email VARCHAR(50) NOT NULL,
+        philhealth_no VARCHAR(100) NOT NULL,
+        occupation VARCHAR(250),
+        guardian VARCHAR(250)
+    );
+
+-- pharmacy
+CREATE TABLE inventory (
+    product_id VARCHAR(250) PRIMARY KEY,
+	product_code VARCHAR(250),
+	product_name VARCHAR(250),
+	brand_name VARCHAR(250),
+	supplier VARCHAR(250),
+	dosage_form VARCHAR(50),
+	dosage VARCHAR(50),
+	reorder_level INT,
+	batch_number VARCHAR(250),
+    date_added DATE,
+	expiration DATE,
+    product_quantity INT
+);
+
+CREATE TABLE beneficiary (
+    id SERIAL PRIMARY KEY,
+	beneficiary_name VARCHAR(250) NOT NULL,
+	beneficiary_gender VARCHAR(50) NOT NULL,
+	beneficiary_address VARCHAR(250),
+	beneficiary_contact VARCHAR(50),
+    beneficiary_birthdate DATE,
+	beneficiary_age INT CHECK (beneficiary_age >= 0),
+	senior_citizen BOOLEAN,
+	pwd BOOLEAN,
+	transaction_number TEXT[],
+    product_details TEXT[],
+	quantity INT[],
+	batch_number TEXT[],
+	expiration_date DATE[],
+	date_issued DATE[],
+	prescribing_doctor TEXT[],
+	requesting_person TEXT[],
+	relationship_beneficiary TEXT[]
+);
+----> 
+
+//first create 3(three) separate database named {CITIZEN}{RHU}{PHARMACY} remember all caps.
+//the above configuration is checked and is correct.
+
+//this configuration includes three different databases the : RHU database, CITIZEN database and PHARMACY database
+1. the table users is inside the RHU database.
+2. the patient table is inside also the RHU database.
+3. the prescription table is inside also the RHU database.
+4. the citizen table is inside the CITIZEN database.
+5. the inventory table is inside the PHARMACY database.
+5. the beneficiary table is inside the PHARMACY database.
+
+6. adding a user go to the url : /hidden/admin/create-user 
+    and register a new user.
+
+7. A NOTICE!!! -> the patient information should match the data on what's on the beneficiary record of the pharmacy, 
+    if someone is requesting a medicine in pharmacy and doesnt have a record on the beneficiary record cannot get a medecine.
+    if whant to be registered register first before dispensing.
+
+    
+this project is agile and is prepared for upgrade.
+
+//DEVELOPERS 
+    kim Galicia -- fullstackdev/ui/ux   
+    adriane Garcia -- frontend/ui/ux
+    mark jhondrex Alde -- frontend/ui/ux
+    chrizza Mae Lovina -- frontend/ui/ux
+    mark philip Catalo -- frontend/ui/ux
+----> 

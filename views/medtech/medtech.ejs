@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/medtech.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+  <title>Medtech</title>
+</head>
+<header class="py-1">
+  <nav id="navbar">
+    <div id="logo2">
+      <img id="logoing" src="/images/group 206.png" alt="">
+    </div>
+    <!-- Logout icon -->
+    <div class="dropdown">
+      <img class="dropbtn" onclick="toggleDropdown()" src="/images/profile.png" alt="">
+      <div id="dropdownContent" class="dropdown-content">
+        <div id="profile-sec">
+          <div id="meow">
+            <img id="profile2" src="/images/profile.png" alt="">
+          </div>
+          <div id="names">
+            <p class=" infos" id="info">
+              <%= surname %>
+                <%= firstname %>
+                  <%= middle_initial %>
+            </p>
+            <p class="infor" id="info">
+              <%= profession %>
+            </p>
+          </div>
+        </div>
+        <hr>
+        <!---------------------------LOGOUT BUTTON---------------------------------------------->
+        <form action="/logout?_method=DELETE" method="POST">
+          <button id="log-butt" type="submit"><i class="fa fa-sign-out-alt"></i> Log out</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<body>
+  <div id="maining">
+    <h1>DOCTOR'S LABORATORY REQUEST</h1>
+    <div id="body">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Unique ID</th>
+              <th>Patient name</th>
+              <th>Age</th>
+              <th>Sex</th>
+              <th>Birth date</th>
+              <th>Parent/Guardian</th>
+              <th>Occupation</th>
+              <th>Date</th>
+              <th>Categories</th>
+              <th>Services</th>
+              <th>Laboratory request</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (getPatientsLab && getPatientsLab.length> 0) { %> <% getPatientsLab.forEach(pr=> { %>
+                <tr>
+                  <td>blank</td>
+                  <td>
+                    <%= pr.unq_id %>
+                  </td>
+                  <td>
+                    <%= pr.fullname %>
+                  </td>
+                  <td>
+                    <%= pr.age %>
+                  </td>
+                  <td>
+                    <%= pr.gender %>
+                  </td>
+                  <td>
+                    <%= pr.birthdate %>
+                  </td>
+                  <td>
+                    <%= pr.guardian %>
+                  </td>
+                  <td>
+                    <%= pr.occupation %>
+                  </td>
+                  <td>
+                    <%= pr.check_date %>
+                  </td>
+                  <td>
+                    <%= pr.category %>
+                  </td>
+                  <td>
+                    <%= pr.service %>
+                  </td>
+                  <td>
+                    <button class="openLabRequests" data-unq-id="<%= pr.unq_id %>"
+                      data-check-date="<%= pr.check_date %>" data-full-name="<%= pr.fullname %>"
+                      data-age="<%= pr.age %>" data-gender="<%= pr.gender %>" data-birthdate="<%= pr.birthdate %>"
+                      data-occupation="<%= pr.occupation %>" data-guardian="<%= pr.guardian %>"
+                      data-category="<%= pr.category %>" data-service="<%= pr.service %>">
+                      Laboratory Request
+                    </button>
+                  </td>
+                </tr>
+                <% }) %>
+                  <% } else { %>
+                    <tr>
+                      <td colspan="12">
+                        <div style="display: block;">
+                          <img style="height: 150px;" src="/images/fxemoji_folder.png" alt="">
+                          <p>No laboratory request.</p>
+                        </div>
+                      </td>
+                    </tr>
+                    <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- request Form -->
+  <div id="addLabResultForm" style="display: none">
+    <form action="/add-LabResult" method="post" enctype="multipart/form-data">
+      <div class="popup-header">
+        <div id="head-pop">
+          <img id="heart" src="/images/Group 209.png" alt="">
+          <h2>Laboratory Request</h2>
+        </div>
+
+        <div id="closeAddLabResultBtn" class="close">&times;</div>
+      </div>
+
+      <div id="tunga">
+        <div id="row">
+          <div>
+            <label for="full_name">Name: </label>
+            <input type="text" id="add_full_name" name="full_name" placeholder="Full Name" readonly />
+          </div>
+          <div>
+            <label for="unq_id">Unique ID: </label>
+            <input type="text" id="add_unq_id" name="unq_id" readonly />
+          </div>
+          <div>
+            <label for="occupation">Occupation: </label>
+            <input type="text" id="add_occupation" name="occupation" readonly />
+          </div>
+          <div>
+            <label for="check_date">Date: </label>
+            <input type="date" id="add_check_date" name="check_date" readonly />
+          </div>
+
+
+        </div>
+        <div id="row">
+          <div>
+            <label for="age">Age: </label>
+            <input type="number" id="add_age" name="age" placeholder="Age" readonly />
+          </div>
+          <div>
+            <label for="gender">Gender: </label>
+            <input type="text" id="add_gender" name="gender" placeholder="Gender" readonly />
+          </div>
+          <div>
+            <input type="date" id="add_birthdate" name="birthdate" readonly />
+          </div>
+
+          <div>
+            <input type="text" id="add_guardian" name="guardian" readonly />
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div id="tungain">
+        <div>
+          <h3 style="font-family: 'Poppins', sans-serif; margin-left: 25px;">Attach Laboratory Result</h3>
+          <div id="imageFieldContainer" class="imageFieldContainer">
+            <div class="imageField">
+              <input type="file" name="lab_result" multiple required />
+            </div>
+
+          </div>
+          <button id="addMoreButton" type="button">Add more</button>
+        </div>
+        <div id="buttons">
+        </div>
+        <div id="options">
+          <h3 style="font-family: 'Poppins', sans-serif; margin-left: 25px;">Categories and Services</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Categories</th>
+                <th>Services</th>
+              </tr>
+            </thead>
+            <tbody>
+              <td><input type="text" id="add_category" name="category" readonly /></td>
+              <td><input type="text" id="add_service" name="service" readonly /></td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div id="sub-flex">
+        <button id="submit-butt" type="submit">Submit</button>
+      </div>
+
+    </form>
+  </div>
+  <script src="/js/medtech-func.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,163 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+#section1 {
+  justify-content: center;
+  padding: 0px 20px;
+  max-height: 550px;
+  min-height: 550px;
+  overflow-y: auto;
+  table-layout: fixed;
+  margin-top: 0px;
+}
+
+#font {
+  font-size: 12px;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ddd;
+
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ddd;
+
+}
+
+th {
+  background-color: #44A130;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  font-weight: 900;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #ddd;
+}
+
+tbody tr:hover {
+  background-color: #ddd;
+}
+
+#semi-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  color: #FF007F;
+  margin-left: 20px;
+  font-weight: 1000;
+  margin-top: 25px;
+  font-size: 35px;
+}
+
+#searching {
+  height: 40px;
+  width: 500px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-style: none;
+  border: solid #000 1px;
+  padding-left: 20px;
+  font-size: 16px;
+  justify-content: end;
+}
+
+#searching:hover {
+  border: solid #FF007F 1px;
+}
+
+#searching:hover::placeholder {
+  color: #FF007F;
+}
+
+#search-butt {
+  height: 40px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 0;
+  width: 60px;
+  background-color: #FF007F;
+  color: #ffffff;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+
+#searcher {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+  margin-top: 30px;
+  gap: 10px;
+
+
+}
+
+#BUTT {
+  height: 35px;
+  width: 150px;
+  max-width: 350px;
+  border-radius: 20px;
+  background-color: #FF007F;
+  border: 1px solid #FF007F;
+  color: white;
+  font-size: 10px;
+  font-family: sans-serif;
+  box-shadow: 0px 3px 3px 3px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+
+}
+
+form {
+  margin-bottom: 1rem;
+}
+
+hr {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+
+}
+
+@media (min-height: 600px) and (max-height: 820px) {
+  #navbar {
+    height: 80px;
+  }
+}
+
+#buttons button {
+  background-color: #FF007F;
+  color: white;
+  border-style: none;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}

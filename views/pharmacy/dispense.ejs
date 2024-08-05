@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+    <link rel="stylesheet" href="/css/pharmacy.css" />
+    <link rel="stylesheet" href="/css/sidebar.css" />
+    <link rel="stylesheet" href="/css/dispense.css" />
+    <link rel="stylesheet" href="/css/overlay.css" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="/js/websocket.js"></script>
+    <title>Dispense</title>
+</head>
+
+<body>
+    <header class="py-1">
+        <nav id="navbar">
+            <div id="logo2">
+                <div class="openbtn" onclick="toggleNav()">&#9776;</div>
+                <img id="logoing" src="/images/Group 206.png" alt="Logo">
+            </div>
+
+            <div id="sidebar" class="sidebar">
+                <div id="profile-sec">
+                    <div id="meow">
+                        <img id="profile2" src="/images/profile.png" alt="Profile">
+                    </div>
+                    <div id="names">
+                        <p class="infos" id="info">
+                            <%= surname %>
+                                <%= firstname %>
+                                    <%= middle_initial %>
+                        </p>
+                        <p class="infor" id="info">
+                            <%= profession %>
+                        </p>
+                    </div>
+                </div>
+                <div id="features">
+                    <hr>
+                    <form action="/pharmacy/inventory" method="GET">
+                        <button id="log-butt" type="submit"><i class="fas fa-home"></i> HOME </button>
+                    </form>
+
+                    <form action="/pharmacy/add-medicine" method="GET">
+                        <button id="log-butt" type="submit"><i class="fas fa-plus-circle"></i> ADD MEDICINE </button>
+                    </form>
+
+                    <form action="/pharmacy/dispense" method="GET">
+                        <button id="log-butt" type="submit"><i class="fas fa-pills"></i> DISPENSE </button>
+                    </form>
+
+                    <form action="/pharmacy/beneficiary-records" method="GET">
+                        <button id="log-butt" type="submit"><i class="fas fa-file-medical-alt"></i> RECORD </button>
+                    </form>
+
+                    <form action="/pharmacy/trends" method="GET">
+                        <button id="log-butt" type="submit"><i class="fas fa-chart-line"></i> TRENDS </button>
+                    </form>
+
+                    <form action="/pharmacy/add-beneficiary" method="GET">
+                        <button id="log-butt" type="submit"><i class="fas fa-user-plus"></i> ADD BENEFICIARY </button>
+                    </form>
+
+                    <form action="/logout?_method=DELETE" method="POST">
+                        <button id="log-butt" type="submit"><i class="fa fa-sign-out-alt"></i> LOGOUT </button>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </nav>
+    </header>
+    <div id="semi-header">
+        <div>
+            <h1>DISPENSE</h1>
+        </div>
+    </div>
+    <div id="font">
+        <div id="section1">
+            <table id="mainTable">
+                <thead>
+                    <tr>
+                        <th>Full name</th>
+                        <th>Gender</th>
+                        <th>Address</th>
+                        <th>Age</th>
+                        <th>Phone no</th>
+                        <th>Medicine</th>
+                        <th>Dosage</th>
+                        <th>Quantity</th>
+                        <th>Physician</th>
+                        <th>Requesting party</th>
+                        <th>Relationship to patient</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (dispenseMed && dispenseMed.length> 0) { %>
+                        <% dispenseMed.forEach(list=> { %>
+                            <tr data-unq_id="<%= list.unq_id %>" data-full_name="<%= list.full_name %>"
+                                data-gender="<%= list.gender %>" data-full_address="<%= list.full_address %>"
+                                data-age="<%= list.age %>" data-phone="<%= list.phone %>"
+                                data-medicine="<%= list.medicine %>" data-dosage="<%= list.dosage %>"
+                                data-quantity="<%= list.quantity %>" data-doctor_name="<%= list.doctor_name %>"
+                                data-receiver="<%= list.receiver %>" data-relationship="<%= list.relationship %>">
+                                <td>
+                                    <%= list.full_name %>
+                                </td>
+                                <td>
+                                    <%= list.gender %>
+                                </td>
+                                <td>
+                                    <%= list.full_address %>
+                                </td>
+                                <td>
+                                    <%= list.age %>
+                                </td>
+                                <td>
+                                    <%= list.phone %>
+                                </td>
+                                <td>
+                                    <%= list.medicine %>
+                                </td>
+                                <td>
+                                    <%= list.dosage %>
+                                </td>
+                                <td>
+                                    <%= list.quantity %>
+                                </td>
+                                <td>
+                                    <%= list.doctor_name %>
+                                </td>
+                                <td>
+                                    <%= list.receiver %>
+                                </td>
+                                <td>
+                                    <%= list.relationship %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="11">No list for dispense</td>
+                                    </tr>
+                                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="overlay" style="display: none;"></div>
+    <div id="dispenseForm" style="display: none">
+        <form action="/dispense-medicine" method="POST">
+            <div class="popup-header">
+                <div id="head-pop">
+                    <img id="heart" src="/images/capsule.png" alt="">
+                    <h2>Dispense Form</h2>
+                </div>
+
+                <span id="closeDispenseBtn" class="close">&times;</span>
+            </div>
+            <div class="form-section">
+                <input type="text" id="unq_id" name="unq_id" style="display: none;">
+                <div>
+                    <label>BENEFICIARY NAME</label>
+                    <input type="text" id="beneficiary_name" name="beneficiary_name" readonly>
+                    <input type="text" id="beneficiary_gender" name="beneficiary_gender" style="display: none;"
+                        readonly>
+                    <input type="text" id="beneficiary_address" name="beneficiary_address" style="display: none;"
+                        readonly>
+                    <input type="text" id="beneficiary_contact" name="beneficiary_contact" style="display: none;">
+                    <input type="text" id="beneficiary_age" name="beneficiary_age" style="display: none;" readonly>
+                </div>
+                <div>
+                    <label>PHYSICIAN</label>
+                    <input type="text" id="prescribing_doctor" name="prescribing_doctor" readonly>
+                </div>
+                <div>
+                    <label>REQUESTING PARTY</label>
+                    <input type="text" id="requesting_person" name="requesting_person" readonly>
+                </div>
+                <div>
+                    <label id="relation">RELATIONSHIP TO BENEFICIARY</label>
+                    <input type="text" id="relationship_beneficiary" name="relationship_beneficiary" readonly>
+                    <!------------------to be filled----------------->
+                    <input type="date" id="expiration_date" name="expiration_date" style="display: none;" readonly>
+                    <!------------------medicine info---------------->
+                    <input type="text" id="batch_number" name="batch_number" placeholder="batch number"
+                        style="display: none;" readonly>
+                    <input type="text" id="dosage" name="dosage" style="display: none;" readonly>
+                </div>
+            </div>
+            <div class="table-section">
+                <h3 id="product">PRODUCT ISSUED SUBFORM</h3>
+                <table id="subFormTable">
+                    <thead>
+                        <tr>
+                            <th>TRANSACTION #</th>
+                            <th>PRODUCT NAME</th>
+                            <th>ISSUED QUANTITY</th>
+                            <th>ISSUED DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" id="transaction_number" name="transaction_number" required
+                                    placeholder="transaction number"></td>
+                            <td><input type="text" id="product_details" name="product_details" readonly></td>
+                            <td><input type="number" id="quantity" name="quantity" readonly></td>
+                            <td><input type="date" id="date_issued" name="date_issued" readonly></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="buts">
+                    <button id="but" type="submit">Dispense</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/dispense-func.js"></script>
+    <script src="/js/aside.js"></script>
+</body>
+
+</html>

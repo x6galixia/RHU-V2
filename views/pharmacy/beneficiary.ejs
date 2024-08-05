@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/beneficiary.css" />
+    <link rel="stylesheet" href="/css/sidebar.css" />
+    <link rel="stylesheet" href="/css/overlay.css" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <script src="/js/websocket.js"></script>
+    <title>Beneficiary Records</title>
+</head>
+
+<body>
+    <!----------------------Header-------------------->
+    <header class="py-1">
+        <nav id="navbar">
+            <div id="logo2">
+                <div class="openbtn" onclick="toggleNav()">&#9776;</div>
+                <img id="logoing" src="/images/Group 206.png" alt="Logo">
+            </div>
+
+            <div id="sidebar" class="sidebar">
+                <div id="profile-sec">
+                    <div id="meow">
+                        <img id="profile2" src="/images/profile.png" alt="Profile">
+                    </div>
+                    <div id="names">
+                        <p class="infos" id="info">
+                            <%= surname %> <%= firstname %> <%= middle_initial %>
+                        </p>
+                        <p class="infor" id="info">
+                            <%= profession %>
+                        </p>
+                    </div>
+                </div>
+                <div id="features">
+                    <hr>
+                    <form action="/pharmacy/inventory" method="GET">
+                        <button id="log-butt" type="submit"><i class="fas fa-home"></i> HOME </button>
+                    </form>
+
+                    <form action="/pharmacy/add-medicine" method="GET">
+                        <button id="log-butt" type="submit"><i class="fas fa-plus-circle"></i> ADD MEDICINE </button>
+                    </form>
+
+                    <form action="/pharmacy/dispense" method="GET">
+                        <button id="log-butt" type="submit"><i class="fas fa-pills"></i> DISPENSE </button>
+                    </form>
+
+                    <form action="/pharmacy/beneficiary-records" method="GET">
+                        <button id="log-butt" type="submit"><i class="fas fa-file-medical-alt"></i> RECORD </button>
+                    </form>
+
+                    <form action="/pharmacy/trends" method="GET">
+                        <button id="log-butt" type="submit"><i class="fas fa-chart-line"></i> TRENDS </button>
+                    </form>
+
+                    <form action="/pharmacy/add-beneficiary" method="GET">
+                        <button id="log-butt" type="submit"><i class="fas fa-user-plus"></i> ADD BENEFICIARY </button>
+                    </form>
+
+                    <form action="/logout?_method=DELETE" method="POST">
+                        <button id="log-butt" type="submit"><i class="fa fa-sign-out-alt"></i> LOGOUT </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!---------------------Beneficiary Table----------------->
+    <div>
+        <h1 class="title">Beneficiary Records</h1>
+        <div style="display: flex; justify-content: end;">
+            <form action="/search-beneficiary" method="post">
+                <div id="searcher" style="margin-right: 40px;">
+                    <input id="searching" type="search" name="search" placeholder="Search">
+                    <button id="search-butt" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Full name</th>
+                        <th>Gender</th>
+                        <th>Address</th>
+                        <th>Contact number</th>
+                        <th>Age</th>
+                        <th>Senior citizen</th>
+                        <th>PWD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (getListBeneficiary && getListBeneficiary.length > 0) { %>
+                        <% getListBeneficiary.forEach(list => { %>
+                            <tr data-beneficiary_name="<%= list.beneficiary_name %>"
+                                data-beneficiary_gender="<%= list.beneficiary_gender %>"
+                                data-beneficiary_address="<%= list.beneficiary_address %>"
+                                data-beneficiary_contact="<%= list.beneficiary_contact %>"
+                                data-beneficiary_age="<%= list.beneficiary_age %>"
+                                data-senior_citizen="<%= list.senior_citizen %>" data-pwd="<%= list.pwd %>"
+                                data-transaction_number="<%= list.transaction_number %>"
+                                data-product_details="<%= list.product_details %>" data-quantity="<%= list.quantity %>"
+                                data-batch_number="<%= list.batch_number %>"
+                                data-expiration_date="<%= list.expiration_date %>"
+                                data-date_issued="<%= list.date_issued %>"
+                                data-prescribing_doctor="<%= list.prescribing_doctor %>"
+                                data-requesting_person="<%= list.requesting_person %>"
+                                data-relationship_beneficiary="<%= list.relationship_beneficiary %>">
+                                <td><%= list.beneficiary_name %></td>
+                                <td><%= list.beneficiary_gender %></td>
+                                <td><%= list.beneficiary_address %></td>
+                                <td><%= list.beneficiary_contact %></td>
+                                <td><%= list.beneficiary_age %></td>
+                                <td><%= list.senior_citizen %></td>
+                                <td><%= list.pwd %></td>
+                            </tr>
+                        <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="7">No list of beneficiaries</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-----------beneficiary index form-->
+    <div id="overlay" style="display: none;"></div>
+    <div id="beneficiaryIndexForm" style="display: none;">
+        <div id="closeIndexBtn">&times;</div>
+        <form>
+            <h1> BENEFICIARY INDEX FORM</h1>
+            <div class="sect">
+                <div id="tunga">
+                    <div id="tungaers">
+                        <label for="beneficiary_name">Name:</label>
+                        <input type="text" id="beneficiary_name" name="beneficiary_name" readonly>
+                    </div>
+                    <div>
+                        <label for="beneficiary_gender">Gender:</label>
+                        <input type="text" id="beneficiary_gender" name="beneficiary_gender" readonly>
+                    </div>
+                    <div>
+                        <label for="beneficiary_address">Address:</label>
+                        <input type="text" id="beneficiary_address" name="beneficiary_address" readonly>
+                    </div>
+                </div>
+                <div id="tunga">
+                    <div>
+                        <label for="beneficiary_contact">Contact:</label>
+                        <input type="text" id="beneficiary_contact" name="beneficiary_contact" readonly>
+                    </div>
+                    <div>
+                        <label for="beneficiary_age">Age:</label>
+                        <input type="text" id="beneficiary_age" name="beneficiary_age" readonly>
+                    </div>
+                </div>
+                <div id="tunga">
+                    <div>
+                        <label for="pwd">PWD:</label>
+                        <input type="text" id="pwd" name="pwd" readonly>
+                    </div>
+                    <div>
+                        <label for="senior_citizen">Senior Citizen:</label>
+                        <input type="text" id="senior_citizen" name="senior_citizen" readonly>
+                    </div>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Transaction number</th>
+                        <th>Product details</th>
+                        <th>Quantity</th>
+                        <th>Batch number</th>
+                        <th>Expiration date</th>
+                        <th>Date issued</th>
+                        <th>Prescribing doctor</th>
+                        <th>Requesting person</th>
+                        <th>Relationship beneficiary</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </form>
+    </div>
+
+    <script src="/js/beneficiary-func.js"></script>
+    <script src="/js/sidebar.js"></script>
+</body>
+
+</html>
