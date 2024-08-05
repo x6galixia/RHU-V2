@@ -48,7 +48,6 @@
         </nav>
     </header>
 
-
     <!---------------------generate id and search id------------------>
     <div id="popup-overlay" class="popup-overlay hidden">
         <div id="popup" class="popup">
@@ -63,12 +62,12 @@
             <p id="error-message">
                 <%= message.error %>
             </p>
-        <% } %>
-        <% if (message && message.success) { %>
-            <p id="success-message">
-                <%= message.success %>
-            </p>
-        <% } %>
+            <% } %>
+                <% if (message && message.success) { %>
+                    <p id="success-message">
+                        <%= message.success %>
+                    </p>
+                    <% } %>
     </div>
 
     <form action="/nurse/send-patient-info" method="post">
@@ -182,39 +181,39 @@
                 </div>
                 <div id="separates">
                     <div class="label">
-                        <label class="required" for="height">Height</label>
-                        <input type="text" id="height" name="height" required>
+                        <label class="required" for="height">Height in cm</label>
+                        <input type="number" id="height" name="height" required oninput="computeBMI()">
                     </div>
                     <div class="label">
-                        <label class="required" for="weight">Weight</label>
-                        <input type="text" id="weight" name="weight" required>
+                        <label class="required" for="weight">Weight in kg</label>
+                        <input type="number" id="weight" name="weight" required oninput="computeBMI()">
                     </div>
                 </div>
 
                 <div id="separates">
                     <div class="label">
-                        <label class="required" for="temperature">Temperature</label>
-                        <input type="text" id="temperature" name="temperature" required>
+                        <label class="required" for="temperature">Temperature c</label>
+                        <input type="number" id="temperature" name="temperature" required>
                     </div>
                     <div class="label">
                         <label class="required" for="pulse_rate">Pulse rate</label>
-                        <input type="text" id="pulse_rate" name="pulse_rate" required>
+                        <input type="number" id="pulse_rate" name="pulse_rate" required>
                     </div>
                 </div>
                 <div id="separates">
                     <div class="label">
                         <label class="required" for="systolic">BP Systolic</label>
-                        <input type="text" id="systolic" name="systolic" placeholder="systolic" required>
+                        <input type="number" id="systolic" name="systolic" placeholder="systolic" required>
                     </div>
                     <div class="label">
                         <label class="required" for="pulse_rate">BP Diastolic</label>
-                        <input type="text" id="diastolic" name="diastolic" placeholder="diastolic" required>
+                        <input type="number" id="diastolic" name="diastolic" placeholder="diastolic" required>
                     </div>
                 </div>
                 <div id="separates">
                     <div class="label">
                         <label class="required" for="respiratory_rate">Respiratory rate</label>
-                        <input type="text" id="respiratory_rate" name="respiratory_rate" required>
+                        <input type="number" id="respiratory_rate" name="respiratory_rate" required>
                     </div>
                     <div class="label">
                         <label class="required" for="bmi">BMI</label>
@@ -237,4 +236,4 @@
     <script src="/js/nurse-scanned.js"></script>
 </body>
 
-</html
+</html>

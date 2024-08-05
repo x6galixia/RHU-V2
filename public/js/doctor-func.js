@@ -298,6 +298,8 @@ document.addEventListener("DOMContentLoaded", function () {
     closeAlertBtn.style.display = "none";
   });
 
+  //-----------------------row clicked handler-------------------------------//
+
   //----------------------->>end
 });
 

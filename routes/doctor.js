@@ -35,7 +35,7 @@ router.get('/search', async (req, res) => {
 
     try {
         const result = await pharmacyPool.query(
-            'SELECT product_name, dosage, product_quantity FROM inventory WHERE product_quantity IS NOT NULL AND product_name ILIKE $1 LIMIT 30',
+            'SELECT product_name, dosage, product_quantity FROM inventory WHERE product_quantity <> 0 AND product_name ILIKE $1 LIMIT 30',
             [`${query}%`]
         );
         res.json(result.rows);
@@ -231,6 +231,15 @@ async function getAllPatients(rhuId) {
         });
 
         return patients;
+    } catch (err) {
+        console.error("Error fetching patients:", err);
+        return [];
+    }
+}
+
+async function getPatientHistory(rhuId, unq_id){
+    try {
+        const viewPatientHistory = await pool.query("SELECT * FROM patient_history WHERE rhu_id = $1, unq_id = $2", [rhuId, unq_id]);
     } catch (err) {
         console.error("Error fetching patients:", err);
         return [];

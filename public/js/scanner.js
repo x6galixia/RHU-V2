@@ -16,9 +16,6 @@ function success(result) {
 
     document.getElementById("result").innerHTML = `
       <h2>Success!</h2>
-      <p>Last Name: ${parsedResult.last_name}</p>
-      <p>First Name: ${parsedResult.first_name}</p>
-      <p>Middle Name: ${parsedResult.middle_name}</p>
     `;
 
     scanner.clear();

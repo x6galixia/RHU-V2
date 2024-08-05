@@ -30,31 +30,74 @@ CREATE TABLE patients (
     philhealth_no VARCHAR(100) NOT NULL,
     occupation VARCHAR(250),
     guardian VARCHAR(250),
-    check_date DATE,
 
     -- nurse
-    height VARCHAR(50),
-    weight VARCHAR(50),
-    systolic VARCHAR(50),
-    diastolic VARCHAR(50),
-    temperature VARCHAR(50),
-    pulse_rate VARCHAR(50),
-    respiratory_rate VARCHAR(50),
-    bmi VARCHAR(50),
-    comment VARCHAR(250),
+    check_date DATE,
+    height INT,
+    weight INT,
+    systolic INT,
+    diastolic INT,
+    temperature INT,
+    pulse_rate INT,
+    respiratory_rate INT,
+    bmi TEXT,
+    comment TEXT,
 
     -- doctor
     follow_date DATE,
-    diagnoses VARCHAR(250),
-    findings VARCHAR(250),
-    category TEXT[],  -- Array of text
-    service TEXT[],   -- Array of text
+    diagnoses TEXT,
+    findings TEXT,
+    category TEXT[],
+    service TEXT[],
     medicine TEXT[],
     instruction TEXT[],
     quantity INT[],
-    prescription_date DATE,
 
+    -- medtech
     lab_result TEXT[]
+);
+
+CREATE TABLE patient_history (
+    unq_id VARCHAR(100) PRIMARY KEY,
+    rhu_id VARCHAR(100) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    middle_name VARCHAR(50),
+    address VARCHAR(100) NOT NULL,
+    barangay VARCHAR(100) NOT NULL,
+    town VARCHAR(100) NOT NULL,
+    birthdate DATE NOT NULL,
+    gender VARCHAR(10) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    philhealth_no VARCHAR(100) NOT NULL,
+    occupation VARCHAR(250),
+    guardian VARCHAR(250), 
+
+    -- nurse
+    check_date DATE[],
+    height INT[],
+    weight INT[],
+    systolic INT[],
+    diastolic INT[],
+    temperature INT[],
+    pulse_rate INT[],
+    respiratory_rate INT[],
+    bmi TEXT[],
+    comment TEXT[],
+
+    -- doctor
+    follow_date DATE[],
+    diagnoses TEXT[],
+    findings TEXT[],
+    category TEXT[][],
+    service TEXT[][],
+    medicine TEXT[][],
+    instruction TEXT[][],
+    quantity INT[][],
+
+    -- medtech
+    lab_result TEXT[][]
 );
 
 CREATE TABLE prescription (
