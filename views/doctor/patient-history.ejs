@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient History</title>
+</head>
+
+<body>
+    <button>Back</button>
+    <form action="/patient-history">
+        <!----------------patient info-->
+        <label for="unq_id">Unique ID</label>
+        <input type="text" name="unq_id" readonly>
+
+        <label for="last_name">Last name</label>
+        <input type="text" name="last_name" readonly>
+
+        <label for="first_name">First name</label>
+        <input type="text" name="first_name" readonly>
+
+        <label for="middle_name">Middle name</label>
+        <input type="text" name="middle_name" readonly>
+
+        <label for="address">Street/purok</label>
+        <input type="text" name="address" readonly>
+
+        <label for="barangay">Barangay</label>
+        <input type="text" name="barangay" readonly>
+
+        <label for="town">Town</label>
+        <input type="text" name="town" readonly>
+
+        <label for="birthdate">Birthdate</label>
+        <input type="date" name="birthdate" readonly>
+
+        <label for="gender">Gender</label>
+        <input type="text" name="gender" readonly>
+
+        <label for="phone">Phone</label>
+        <input type="text" name="phone" readonly>
+
+        <label for="email">Email</label>
+        <input type="text" name="email" readonly>
+
+        <label for="philhealth_no">Philhealth number</label>
+        <input type="text" name="philhealth_no" readonly>
+
+        <label for="occupation">Occupation</label>
+        <input type="text" name="occupation" readonly>
+
+        <label for="guardian">Guardian</label>
+        <input type="text" name="guardian" readonly>
+
+        <!-------------------records------------->
+        <label for="check_date">Checkup date</label>
+        <input type="date" name="check_date" readonly>
+
+        <label for="height">Height in cm</label>
+        <input type="number" name="height" readonly>
+
+        <label for="weight">Weight in kg</label>
+        <input type="number" name="weight" readonly>
+
+        <label for="systolic">Systolic</label>
+        <input type="number" name="systolic" readonly>
+
+        <label for="diastolic">Diastolic</label>
+        <input type="number" name="diastolic" readonly>
+
+        <label for="temperature">Temperature in celcius</label>
+        <input type="number" name="temperature" readonly>
+
+        <label for="pulse_rate">Pulse rate</label>
+        <input type="number" name="pulse_rate" readonly>
+
+        <label for="respiratory_rate">Respiratory rate</label>
+        <input type="number" name="respiratory_rate" readonly>
+
+        <label for="bmi">BMI</label>
+        <input type="text" name="bmi" readonly>
+
+        <label for="comment">Comment</label>
+        <input type="text" name="comment" readonly>
+
+        <input type="hidden" name="follow_date" readonly>
+
+        <label for="diagnosis">Diagnosis</label>
+        <input type="text" name="diagnosis" readonly>
+
+        <label for="findings">Findings</label>
+        <input type="text" name="findings" readonly>
+
+        <label for="medicine">Medicine</label>
+        <input type="text" name="medicine" readonly>
+
+        <label for="instruction">Instruction</label>
+        <input type="text" name="instruction" readonly>
+
+        <label for="quantity">Quantity</label>
+        <input type="number" name="quantity" readonly>
+
+        <div>
+            <h3>List of Lab Results</h3>
+            <div id="list">
+                <ul id="labResultList"></ul>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

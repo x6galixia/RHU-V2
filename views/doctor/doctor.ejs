@@ -102,7 +102,7 @@
           <tbody>
             <% if (patientListDrop && patientListDrop.length> 0) { %>
               <% patientListDrop.forEach(pt=> { %>
-                <tr>
+                <tr data-unq_id="<%= pt.unq_id %>">
                   <td>
                     <%= pt.unq_id %>
                   </td>
